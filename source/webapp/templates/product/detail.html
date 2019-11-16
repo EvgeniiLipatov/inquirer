@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}{{ product.name }}{% endblock %}
+{% block content %}
+    <div class="text-center">
+        <h1>{{ product.name }}</h1>
+        <div class="row">
+            <div class="col col-12 col-sm-10 col-md-8 col-lg-6 m-auto">
+                {% if product.photo %}
+                  <img src="{{ product.photo.url }}" class="img-fluid" alt="{{ product.name }}">
+                {% else %}
+                    <img class="avatar" src="{% static "pics/index.jpeg" %}" alt="My image"/>
+                {% endif %}
+
+            </div>
+        </div>
+        <p><b>Категория:</b> {{ product.get_category_display }}</p>
+        <p><b>Цена:</b> {{ product.description }} </p>
+        <p><a href="{% url "webapp:product_update" product.pk %}" class="btn btn-primary">Изменить</a></p>
+        <p><a href="{% url "webapp:product_delete" product.pk %}" class="btn btn-danger">Удалить</a></p>
+    </div>
+{% endblock %}
