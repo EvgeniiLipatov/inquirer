@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}{{ user_obj.username }}{% endblock %}
+{% block menu %}
+    {% if user_obj == request.user %}
+        <li><a href="{% url "accounts:user_update" user_obj.pk %}">Edit Profile</a></li>
+        <li><a href="{% url 'accounts:user_change_password' user_obj.pk %}">Change Password</a></li>
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <h1>Profile: {{ user_obj.username }}</h1>
+    {% if user_obj.profile.avatar %}
+       <img class="avatar" src="{{ user_obj.profile.avatar.url }}">
+    {% else %}
+         <img class="avatar" src="{% static "pics/angry_cat.jpg" %}" alt="My image"/>
+    {% endif %}
+    <p>First Name: <b>{{ user_obj.first_name }}</b></p>
+    <p>Last Name: {{ user_obj.last_name }}</p>
+    <p>Email: {{ user_obj.email }}</p>
+    <p>Birth Date: {{ user_obj.profile.birth_date|date:"d:m:Y" }}</p>
+    {% if user_obj.profile.gitProfile %}
+        <p>GitHub: {{ user_obj.profile.gitProfile }}</p>
+    {% endif %}
+    {% if user_obj.profile.about %}
+        <p>About: {{ user_obj.profile.about }}</p>
+    {% endif %}
+{% endblock %}
