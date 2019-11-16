@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 CATEGORY_CHOICES = (
@@ -38,8 +39,7 @@ class Review(models.Model):
     text = models.TextField(max_length=1000, verbose_name='Текст отзыва')
     author = models.ForeignKey('auth.User', null=True, blank=True, default=None, verbose_name='Автор',
                                on_delete=models.CASCADE, related_name='reviews')
-    mark = models.IntegerField(choices=MARK_CHOICE, default=MARK_CHOICE[2][1],
-                                verbose_name='Категория')
+    mark = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], null=False, blank=False)
 
 
     def __str__(self):

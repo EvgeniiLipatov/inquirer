@@ -3,7 +3,6 @@
 {% block content %}
     <h1 class="text-center">Создать товар</h1>
     <form action="{% url "webapp:product_create" %}" method="POST" enctype="multipart/form-data">
-        {% include 'partial/form.html' %}
-        <input type="submit" value="Создать" class="btn btn-primary">
+         {% include 'partial/form.html' with button_text="Create" %}
     </form>
 {% endblock %}

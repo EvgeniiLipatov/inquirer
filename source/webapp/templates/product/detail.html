@@ -19,4 +19,19 @@
         <p><a href="{% url "webapp:product_update" product.pk %}" class="btn btn-primary">Изменить</a></p>
         <p><a href="{% url "webapp:product_delete" product.pk %}" class="btn btn-danger">Удалить</a></p>
     </div>
+    <hr>
+    <hr>
+    <p><a href="{% url "webapp:product_review_create" product.pk %}" class="btn btn-primary">Создать отзыв</a></p>
+    <hr>
+    <h3>Reviews:</h3>
+    {% for review in product.goods.all %}
+           <p>{{ review}} </p> </a>
+           <a href="{% url "accounts:user_detail" review.author.pk %}"> <p>{{ review.author }} </p> </a>
+           <a href="{% url "webapp:review_delete" review.pk %}"> Удалить отзыв</a>
+           <a href="{% url "webapp:review_update" review.pk %}"> Обновить отзыв</a>
+
+    {% empty %}
+        <p>No Reviews yet.</p>
+{% endfor %}
+
 {% endblock %}

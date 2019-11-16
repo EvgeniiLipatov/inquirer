@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Удалить Отзыв{% endblock %}
+{% block content %}
+    <h3 class="text-center">Удалить Отзыв {{ product }} </h3>
+    <form class="text-center" action="{% url "webapp:review_delete" review.pk %}"
+          method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="submit" value="ОК" class="btn btn-danger">
+        <a href="{% url 'webapp:index' %}" class="btn btn-secondary">Отмена</a>
+    </form>
+{% endblock %}
